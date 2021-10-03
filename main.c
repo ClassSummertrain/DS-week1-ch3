@@ -1,7 +1,7 @@
 //表ADT：单链表实现
 #include "stdio.h"				
 #include "stdlib.h"				//提供malloc()和free()
-#include "string.h"				//提供strcpy()等
+#include "string.h"				
 struct Node
 {
 	int a;				//数据域
@@ -25,12 +25,10 @@ void AddListTill(int a )//在链表尾添加一个结点
 		{	
 
 			head=temp;
-		//	end=temp;
 		}
 		else
 		{
 		end->next=temp;
-	//	end=temp;			//尾结点应该始终指向最后一个
 		}
 		end=temp;			//尾结点应该始终指向最后一个
 }
@@ -61,7 +59,7 @@ struct Node* FindNode(int a )//查找
 		return NULL;
 } 
 
-void FreeList()//删除
+void FreeList()//删除所有结点
 {
 	//一个一个NULL
 	struct Node *temp =head;		//定义一个临时变量来指向头
@@ -72,7 +70,7 @@ void FreeList()//删除
 		temp = temp->next;		//temp指向下一个的地址 即实现++操作
 		free(pt);					//释放当前
 	}
-	//头尾清空	不然下次的头就接着0x10
+	//头尾清空
 	head =NULL;
 	end =NULL;
 }
@@ -436,84 +434,6 @@ int getLength(SeqStack s) {
 //清空栈
 void clearStack(SeqStack* s) {
 	s->top = 0;
-}
-
-//栈ADT链表形式实现
-#include<stdbool.h>
-#include<stdlib.h>
-typedef int datatype;
- 
-//Link Stack 实现顺序栈，使用链表来实现
- 
-struct stack
-{
-    datatype data;
-    struct stack *next;
-};
- 
-typedef struct stack Stack;
-//创建栈
-Stack *s;
-//初始化栈
-void init()
-{
-    s=NULL;
-}
- 
-//判断栈是否为空
-bool Empty()
-{
-    if(s==NULL)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
- 
-//入栈
-void Push(datatype element)
-{
-    Stack *p = (Stack *)malloc(sizeof(Stack));
-    p->data=element;
-    p->next=s;
-    s=p;             
-}
- 
-//出栈
-void Pop()
-{
-    if(!Empty(s))
-    {
-        s=s->next;
-    }
-    else
-    {
-        printf("栈空\n");
-    }
-}
- 
-//取栈顶元素
-datatype Top()
-{
-    if(!Empty(s))
-    {
-        return s->data;
-    }
-    else
-    {
-        printf("栈空\n");
-    }
-}
- 
-//销毁栈
-void Destroy()
-{
-    free(s);//因该销毁每一个元素
-    s=NULL;
-    // free(s.data); //容易导致失败
 }
 
 //顺序队列实现
